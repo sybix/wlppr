@@ -15,6 +15,7 @@ from HTMLParser import HTMLParser
 rez="1280x800"
 imgDir=""
 shuffle=False
+writeRezInFileName=True
 
 class MyHTMLParser(HTMLParser): 
     def handle_data(self, data):
@@ -22,7 +23,10 @@ class MyHTMLParser(HTMLParser):
 		base_url=data.split("'")
 		url="http://wlppr.com/"+base_url[1]+"."+rez+".jpg";
 		nameArray=base_url[1].split('/')
-		name=imgDir+nameArray[-1]+"."+rez+".jpg";
+		if writeRezInFileName:
+			name=imgDir+nameArray[-1]+"."+rez+".jpg";
+		else:
+			name=imgDir+nameArray[-1]+".jpg";
 		if os.path.isfile(name) == False:
 			imgFile=open(name,"wb")
 			img=pycurl.Curl()
