@@ -4,11 +4,17 @@
 #Internet Ressources : http://stackoverflow.com/questions/4589241/downloading-files-from-an-http-server-in-python
 #		       http://docs.python.org/2/library/htmlparser.html
 
+import getopt
 import pycurl
 import sys
 import os
 import StringIO
 from HTMLParser import HTMLParser
+
+#Variables
+rez="1280x800"
+imgDir=""
+shuffle=False
 
 class MyHTMLParser(HTMLParser): 
     def handle_data(self, data):
@@ -29,11 +35,22 @@ class MyHTMLParser(HTMLParser):
 		else:
 			print "File already exists"
 
+try: #param stuff
+        opts, args = getopt.getopt(sys.argv[1:],"s",["shuffle"])
+except getopt.GetoptError as err:
+        print(err)
+        sys.exit(2)
+
+for o, a in opts: #set verbose mode
+        if o in ("-s","--shuffle"):
+                shuffle = True
+
 b = StringIO.StringIO()
 c=pycurl.Curl()
-rez="1280x800"
-imgDir="/home/sybix/Images/wallpaper/"
-c.setopt(c.URL,'http://wlppr.com/')
+if shuffle:
+	c.setopt(c.URL,'http://wlppr.com/shuffle')
+else:
+	c.setopt(c.URL,'http://wlppr.com/')
 c.setopt(pycurl.WRITEFUNCTION, b.write)
 c.perform()
 c.close()
