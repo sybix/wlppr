@@ -33,8 +33,7 @@ b = StringIO.StringIO()
 c=pycurl.Curl()
 rez="1280x800"
 imgDir="/home/sybix/Images/wallpaper/"
-#c.setopt(c.URL,'http://wlppr.com/')
-c.setopt(c.URL,'http://wlppr.com/2013/04/28/the-hobbit')
+c.setopt(c.URL,'http://wlppr.com/')
 c.setopt(pycurl.WRITEFUNCTION, b.write)
 c.perform()
 c.close()
