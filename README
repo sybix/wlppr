@@ -1,0 +1,6 @@
+wlppr.py is a small script to download current image from wlppr
+you need pycurl
+
+Usage : 
+set rez and imgDir variables in wlppr.py
+python wlppr.py
