@@ -1,6 +1,5 @@
 #!/usr/bin/python
-
-
+# script by sybix : https://github.com/sybix/wlppr
 #Internet Ressources : http://stackoverflow.com/questions/4589241/downloading-files-from-an-http-server-in-python
 #		       http://docs.python.org/2/library/htmlparser.html
 
@@ -15,6 +14,7 @@ from HTMLParser import HTMLParser
 rez="1280x800"
 imgDir=""
 shuffle=False
+url=""
 writeRezInFileName=True
 
 class MyHTMLParser(HTMLParser): 
@@ -40,7 +40,7 @@ class MyHTMLParser(HTMLParser):
 			print "File already exists"
 
 try: #param stuff
-        opts, args = getopt.getopt(sys.argv[1:],"s",["shuffle"])
+        opts, args = getopt.getopt(sys.argv[1:],"su:",["shuffle","url="])
 except getopt.GetoptError as err:
         print(err)
         sys.exit(2)
@@ -48,11 +48,17 @@ except getopt.GetoptError as err:
 for o, a in opts: #set verbose mode
         if o in ("-s","--shuffle"):
                 shuffle = True
+        if o in ("-u","--url"):
+		url=a
+		if "wlppr.com" not in a:
+			url = "http://wlppr.com/"+url
 
 b = StringIO.StringIO()
 c=pycurl.Curl()
 if shuffle:
 	c.setopt(c.URL,'http://wlppr.com/shuffle')
+elif url != "":
+	c.setopt(c.URL,url)
 else:
 	c.setopt(c.URL,'http://wlppr.com/')
 c.setopt(pycurl.WRITEFUNCTION, b.write)

@@ -4,3 +4,5 @@ you need pycurl
 Usage : 
 set rez and imgDir variables in wlppr.py
 python wlppr.py
+python wlppr.py -s #for shuffle
+python wlppr.py -u http://wlppr.com/2013/04/27/bang # or -u 2013/04/27/bang to get http://wlppr.com/2013/04/27/bang image
