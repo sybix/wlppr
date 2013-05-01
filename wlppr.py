@@ -45,7 +45,7 @@ except getopt.GetoptError as err:
         print(err)
         sys.exit(2)
 
-for o, a in opts: #set verbose mode
+for o, a in opts: 
         if o in ("-s","--shuffle"):
                 shuffle = True
         if o in ("-u","--url"):
